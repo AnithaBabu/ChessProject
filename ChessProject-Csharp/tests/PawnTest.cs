@@ -51,9 +51,9 @@ namespace SolarWinds.MSP.Chess
 		public void Pawn_Move_LegalCoordinates_Forward_UpdatesCoordinates()
 		{
 			chessBoard.Add(pawn, 6, 3, PieceColor.Black);
-			pawn.Move(MovementType.Move, 6, 2);
-			Assert.AreEqual(pawn.XCoordinate, 6);
-            Assert.AreEqual(pawn.YCoordinate, 2);
+			pawn.Move(MovementType.Move, 5, 3);
+			Assert.AreEqual(pawn.XCoordinate, 5);
+            Assert.AreEqual(pawn.YCoordinate, 3);
 		}
 	}
 }

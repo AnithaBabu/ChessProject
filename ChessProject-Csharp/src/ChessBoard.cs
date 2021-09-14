@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace SolarWinds.MSP.Chess
+﻿namespace SolarWinds.MSP.Chess
 {
     public class ChessBoard
     {
@@ -8,19 +6,53 @@ namespace SolarWinds.MSP.Chess
         public static readonly int MaxBoardHeight = 7;
         private Pawn[,] pieces;
 
-        public ChessBoard ()
+        public ChessBoard()
         {
             pieces = new Pawn[MaxBoardWidth, MaxBoardHeight];
         }
 
         public void Add(Pawn pawn, int xCoordinate, int yCoordinate, PieceColor pieceColor)
         {
-            throw new NotImplementedException("Need to implement ChessBoard.Add()");
+            if (IsValidRow(pieceColor, xCoordinate) && IsLegalBoardPosition(xCoordinate, yCoordinate)
+                && pieces.GetValue(xCoordinate, yCoordinate) == null)
+            {
+                SetCoordinates(pawn, xCoordinate, yCoordinate);
+                pieces[xCoordinate, yCoordinate] = pawn;
+            }
+            else
+            {
+                SetCoordinates(pawn, -1, -1);
+            }
+
         }
 
         public bool IsLegalBoardPosition(int xCoordinate, int yCoordinate)
         {
-            throw new NotImplementedException("Need to implement ChessBoard.IsLegalBoardPosition()");
+            if (IsValidCoordinate(xCoordinate))
+            {
+                return IsValidCoordinate(yCoordinate);
+            }
+            return false;
+        }
+
+        private bool IsValidRow(PieceColor pieceColor, int xCoordinate)
+        {
+            if (pieceColor == PieceColor.Black && xCoordinate == 6)
+                return true;
+            return false;
+        }
+
+        private void SetCoordinates(Pawn pawn, int xCoordinate, int yCoordinate)
+        {
+            pawn.XCoordinate = xCoordinate;
+            pawn.YCoordinate = yCoordinate;
+        }
+
+        private bool IsValidCoordinate(int coordinate)
+        {
+            if (coordinate < 0 || coordinate > 7)
+                return false;
+            return true;
         }
     }
 }

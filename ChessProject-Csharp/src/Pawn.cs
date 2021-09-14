@@ -40,7 +40,14 @@ namespace SolarWinds.MSP.Chess
 
         public void Move(MovementType movementType, int newX, int newY)
         {
-            throw new NotImplementedException("Need to implement Pawn.Move()");
+            if (pieceColor == PieceColor.Black)
+            {
+                if (xCoordinate - 1 == newX && yCoordinate == newY)
+                {
+                    xCoordinate = newX;
+                    yCoordinate = newY;
+                }
+            }
         }
 
         public override string ToString()
